@@ -14,6 +14,7 @@ def age_calc(born):
 
 
 def bogo(df):
+    """Calculates if a customer took up the BOGO offer. Takes in a data frame"""
     if df['offer_type']=='bogo':
         if df['offer_completed']==df['offer_viewed']:
             return df['offer_completed']
@@ -27,6 +28,7 @@ def bogo(df):
         return 0
 
 def discount(df):
+    """Calculates if a customer took up the Discount offer. Takes in a data frame"""
     if df['offer_type']=='discount':
         if df['offer_completed']==df['offer_viewed']:
             return df['offer_completed']
@@ -41,6 +43,8 @@ def discount(df):
 
 
 def info(df):
+
+    """Calculates if a customer viewed an Informational offer. Takes in a data frame"""
     if df['offer_type']=='informational':
         if df['offer_viewed']==df['offer_received']:
             return df['offer_viewed']
@@ -54,12 +58,14 @@ def info(df):
 
     
 def offer_time(df):
-    if (df['discount_taken']>0 or df['bogo_taken']>0) :
+    """Calculates how quickly an offer waas taken up after it was viewed. Takes in a data frame"""
+    if df['discount_taken']>0 or df['bogo_taken']>0:
         return (df['offer_completed']- df['offer_viewed'])
     else:
         return 0
 
 def info_time(df):
+    """Calculates how quickly an informational offer is viewed. Takes in a data frame"""
     if df['info_viewed']>0:
         return (df['offer_viewed']-df['offer_received'])
     else:
